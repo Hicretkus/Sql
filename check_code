@@ -28,6 +28,9 @@ BEGIN
 
     RETURN;
 END;
+
+---EXEC [dbo].[check_code]
+
 /*
 Kodun ilk 7 karakterinin ASCII değerleri toplanır.
 Bu toplam, karakter setinin uzunluğuna göre mod alma işlemine tabi tutulur.
