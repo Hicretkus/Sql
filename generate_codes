@@ -1,0 +1,32 @@
+CREATE PROCEDURE [dbo].[generate_codes]
+AS
+BEGIN
+    DECLARE @chars VARCHAR(23) = 'ACDEFGHKLMNPRTXYZ234579';
+    DECLARE @code VARCHAR(8), @checkChar CHAR(1);
+    DECLARE @i INT, @rand INT, @asciiTotal INT, @modVal INT;
+    DECLARE @count INT = 0;
+
+    WHILE @count < 1000
+    BEGIN
+        SET @i = 1;
+        SET @code = '';
+        SET @asciiTotal = 0;
+
+        WHILE @i <= 7 
+        BEGIN
+         
+            SET @rand = CAST(RAND(CHECKSUM(NEWID())) * LEN(@chars) AS INT) + 1;
+            SET @checkChar = SUBSTRING(@chars, @rand, 1);
+            SET @code = @code + @checkChar;
+            SET @asciiTotal = @asciiTotal + ASCII(@checkChar);
+            SET @i = @i + 1;
+        END
+
+        SET @modVal = @asciiTotal % LEN(@chars); 
+        SET @checkChar = SUBSTRING(@chars, @modVal + 1, 1); 
+        SET @code = @code + @checkChar;
+
+        PRINT @code; 
+        SET @count = @count + 1;
+    END
+END;
