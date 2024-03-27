@@ -29,7 +29,12 @@ BEGIN
     RETURN;
 END;
 
----EXEC [dbo].[check_code]
+
+--Test--
+/* 
+DECLARE @Result INT
+EXEC [dbo].[check_code] @Code = 'AAAAAAAA', @IsValid = @Result OUTPUT
+PRINT 'Kodun Geçerliliği: ' + CAST(@Result AS VARCHAR(10))*/
 
 /*
 Kodun ilk 7 karakterinin ASCII değerleri toplanır.
