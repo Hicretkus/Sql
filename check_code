@@ -28,3 +28,11 @@ BEGIN
 
     RETURN;
 END;
+/*
+Kodun ilk 7 karakterinin ASCII değerleri toplanır.
+Bu toplam, karakter setinin uzunluğuna göre mod alma işlemine tabi tutulur.
+Elde edilen sonuç, kontrol karakterinin karakter setindeki pozisyonunu belirler.
+Kontrol Karakterinin Doğrulanması:
+Eğer kodun son karakteri, yukarıda hesaplanan kontrol karakteri ile eşleşirse, kod geçerli kabul edilir (@IsValid = 1).
+Eğer eşleşmezse, kod geçersiz kabul edilir (@IsValid = 0).
+*/
