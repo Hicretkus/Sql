@@ -1,17 +1,19 @@
 CREATE PROCEDURE [dbo].[generate_codes]
 AS
 BEGIN
-    DECLARE @chars VARCHAR(23) = 'ACDEFGHKLMNPRTXYZ234579';
-    DECLARE @code VARCHAR(8), @checkChar CHAR(1);
-    DECLARE @i INT, @rand INT, @asciiTotal INT, @modVal INT;
-    DECLARE @count INT = 0;
+    DECLARE @chars VARCHAR(23) = 'ACDEFGHKLMNPRTXYZ234579'; -- @chars değişkeni tanımlanır, oluşturulacak kodlarda kullanılacak karakter setini belirtir.
+    DECLARE @code VARCHAR(8), @checkChar CHAR(1);  --  @code ve @checkChar değişkenleri tanımlanır; sırasıyla oluşturulacak kodu ve kodun sonundaki kontrol karakterini tutarlar.
+    DECLARE @i INT, @rand INT, @asciiTotal INT, @modVal INT; -- @i, @rand, ve @asciiTotal sayacı ve toplam ASCII değerini tutmak için tanımlanır. @modVal mod alma işlemi için tanımlandı
+    DECLARE @count INT = 0; -- @count kod sayısını tutmak için tanımlandı.
 
-    WHILE @count < 1000
+    WHILE @count < 1000  -- 1000 kod oluşturulana kadar döngüyü başlatır.
     BEGIN
-        SET @i = 1;
-        SET @code = '';
+        SET @i = 1;   -- Her bir kod için değişkenlerin başlangıç değerlerini ayarlar.
+        SET @code = '';  
         SET @asciiTotal = 0;
 
+
+---Her bir kod için 7 karakter seçer. Bu karakterler rastgele seçilir ve kodun bir parçası haline gelir. Ayrıca, her karakterin ASCII değeri @asciiTotal değişkenine eklenir.
         WHILE @i <= 7 
         BEGIN
          
@@ -21,12 +23,13 @@ BEGIN
             SET @asciiTotal = @asciiTotal + ASCII(@checkChar);
             SET @i = @i + 1;
         END
+---- ASCII toplamının mod alma işlemi sonucuna göre kontrol karakteri belirlenir ve koda eklenir.
 
         SET @modVal = @asciiTotal % LEN(@chars); 
         SET @checkChar = SUBSTRING(@chars, @modVal + 1, 1); 
         SET @code = @code + @checkChar;
 
-        PRINT @code; 
-        SET @count = @count + 1;
+        PRINT @code;  --Oluşturulan kodu ekrana yazdırır.
+        SET @count = @count + 1; -- Kod sayacını artırır.
     END
 END;
