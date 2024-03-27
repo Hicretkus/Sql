@@ -33,3 +33,12 @@ BEGIN
         SET @count = @count + 1; -- Kod sayacını artırır.
     END
 END;
+/*
+Kod Oluşturma:
+
+Her kod için, yedi karakter rastgele seçilir. Bu seçim, belirlenen karakter setinden (@chars) yapılır.
+Her seçim, RAND() ve NEWID() fonksiyonları kullanılarak rastgele bir sayı üretip bu sayının karakter setinin uzunluğuyla orantılı bir şekilde karakter seçimi yaparak gerçekleştirilir.
+Seçilen her karakter, bir kodun parçası haline gelir ve bu karakterlerin ASCII değerlerinin toplamı hesaplanır.
+Toplam ASCII değeri, karakter setinin uzunluğuna göre mod alma işlemine tabi tutulur. Bu işlemin sonucu, kontrol karakterinin karakter setindeki pozisyonunu belirler.
+Bu kontrol karakteri, kodun sonuna eklenir, böylece her kod 8 karakterden oluşur: 7 rastgele karakter ve 1 kontrol karakteri.
+*/
